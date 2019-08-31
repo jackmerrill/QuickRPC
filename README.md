@@ -11,3 +11,6 @@
 ### 3. Customize within the app!
 
 ### 4. You're done!
+
+
+## Default install location is `C:\Users\[user]\AppData\Local\QuickRPC`
