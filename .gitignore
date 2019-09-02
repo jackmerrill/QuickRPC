@@ -1,4 +1,3 @@
 node_modules
 releases/*
-build/dist/
-installers/*
+build/*
