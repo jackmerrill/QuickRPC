@@ -1,4 +1,5 @@
 // Modules to control application life and create native browser window
+if (require('electron-squirrel-startup')) return;
 const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 const os = require("os")
@@ -8,11 +9,11 @@ const os = require("os")
 let mainWindow
 var dataPath
 if (process.platform === "win32"){
-  dataPath = "C:/Users/"+os.userInfo().username+"/AppData/Local/QuickRPC/data.qrpc"
+  dataPath = "C:/Users/"+os.userInfo().username+"/AppData/Local/quickrpc/data.qrpc"
 } else if (process.platform === "darwin"){
-  dataPath = "~/Library/Application Support/QuickRPC/data.qrpc"
+  dataPath = "~/Library/Application Support/quickrpc/data.qrpc"
 } else if (process.platform === "linux"){
-  dataPath = "~/.config/QuickRPC/data.qrpc"
+  dataPath = "~/.config/quickrpc/data.qrpc"
 }
 
 
@@ -23,7 +24,7 @@ var Datastore = require('nedb')
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 500,
+    width: 300,
     height: 400,
     title: 'Discord Rich Presence Editor',
     webPreferences: {
@@ -51,12 +52,9 @@ function createWindow () {
   mainWindow.webContents.on('did-finish-load', () => {
     db.findOne({dataID: 1}, function (err, data) {
       if (err) console.error(err)
-      if (data.clientid === undefined){
-        console.log("RPID is undefined!")
+      if (data === null || data.clientid === undefined){
         return
       } else {
-        console.log("RPID is defined. Continuing.")
-        console.log(data)
         mainWindow.webContents.send('ping', data)
       }
   })

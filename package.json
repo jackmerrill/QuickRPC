@@ -1,22 +1,26 @@
 {
   "name": "quickrpc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Discord Rich Presence quickly and easily. Made in Electron.js.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "epi"
   },
   "author": "Jack Merrill",
   "devDependencies": {
     "electron": "^6.0.5",
     "electron-builder": "^21.2.0",
+    "electron-installer-windows": "^2.0.0",
     "electron-winstaller": "^4.0.0",
     "electron-wix-msi": "^2.1.1"
   },
   "dependencies": {
     "discord-rich-presence": "0.0.8",
-    "nedb": "^1.8.0",
-    "electron": "^6.0.5"
+    "electron": "^6.0.5",
+    "electron-squirrel-startup": "^1.0.0",
+    "esm": "^3.2.25",
+    "nedb": "^1.8.0"
   },
   "keywords": [
     "discord",
