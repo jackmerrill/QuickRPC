@@ -21,3 +21,14 @@ document.querySelector('#submit').addEventListener('click', function() {
   let ipcRenderer = require('electron').ipcRenderer;
   ipcRenderer.send('submitForm', formData);
 });
+// Determines if the input ClientID is valid
+document.querySelector('#rpid').addEventListener('change', checkLength);
+function checkLength(){
+  var length = this.value.length;
+  console.log(length);
+  if(length >= 17 && length <= 20){
+    document.getElementById("IDCheck").style.display= 'none';
+  } else{
+    document.getElementById("IDCheck").style.display= 'block';
+  }
+}

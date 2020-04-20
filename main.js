@@ -17,21 +17,22 @@ if (process.platform === "win32"){
 
 
 var Datastore = require('nedb')
-  , db = new Datastore({ filename: dataPath, autoload: true });
+, db = new Datastore({ filename: dataPath, autoload: true });
 
 
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 500,
-    height: 400,
+    width: 700,
+    height: 600,
     title: 'Discord Rich Presence Editor',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
     }
   })
-  mainWindow.setMenu(null)
+  //New function in electron v5.0.0 to remove menu
+  mainWindow.removeMenu();
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
@@ -59,10 +60,10 @@ function createWindow () {
         console.log(data)
         mainWindow.webContents.send('ping', data)
       }
-  })
+    })
 
 
-  
+
   });
 
 }

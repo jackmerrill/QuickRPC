@@ -1,139 +1,136 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Discord Rich Presence Editor</title>
-  </head>
-  <body>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
-    <script>
-      // haha bad code amirite
-      require('electron').ipcRenderer.on('ping', (event, message) => {
-        console.log(message)
-        document.querySelector('input[id="rpid"]').value = message.clientid
-        document.querySelector('input[id="state"]').value = message.state
-        document.querySelector('input[id="details"]').value = message.details
-        document.querySelector('input[id="sdate"]').value = message.startTimestamp
-        document.querySelector('input[id="edate"]').value = message.endTimestamp
-        document.querySelector('input[id="lgimgkey"]').value = message.largeImageKey
-        document.querySelector('input[id="smimgkey"]').value = message.smallImageKey
-        document.querySelector('input[id="psize"]').value = message.partySize
-        document.querySelector('input[id="psizem"]').value = message.partyMax
-      })
-    </script>
-    <div id="container">
-      <form class="form-horizontal">
-          <fieldset>
-          
-          <!-- Form Name -->
-          <legend>Set Rich Presence</legend>
-          
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="rpid">Discord App ID</label>  
-            <div class="col-md-4">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord Rich Presence Editor</title>
+</head>
+<body>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+  <script>
+  // haha bad code amirite
+  // yea this pains me to look at but hey, it works!
+  require('electron').ipcRenderer.on('ping', (event, message) => {
+    console.log(message)
+    document.querySelector('input[id="rpid"]').value = message.clientid
+    document.querySelector('input[id="state"]').value = message.state
+    document.querySelector('input[id="details"]').value = message.details
+    document.querySelector('input[id="sdate"]').value = message.startTimestamp
+    document.querySelector('input[id="edate"]').value = message.endTimestamp
+    document.querySelector('input[id="lgimgkey"]').value = message.largeImageKey
+    document.querySelector('input[id="smimgkey"]').value = message.smallImageKey
+    document.querySelector('input[id="psize"]').value = message.partySize
+    document.querySelector('input[id="psizem"]').value = message.partyMax
+  })
+  </script>
+  <div id="container">
+    <form class="form-horizontal">
+      <fieldset>
+
+        <!-- Form Name -->
+        <legend>Set Rich Presence</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="rpid">Discord App ID/Client ID</label>
+          <div class="col-md-4">
             <input id="rpid" name="rpid" type="text" placeholder="Ex. 5768934708530" class="form-control input-md" required="">
-            <span class="help-block">Example is not a real ID</span>  
-            </div>
+            <span id="IDCheck" class="help-block">Invalid client ID</span>
           </div>
-          
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="state">State</label>  
-            <div class="col-md-5">
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="state">Current State</label>
+          <div class="col-md-5">
             <input id="state" name="state" type="text" placeholder="Ex. Gaming" class="form-control input-md" required="">
-              
-            </div>
+
           </div>
-          
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="details">Details</label>  
-            <div class="col-md-4">
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="details">Details</label>
+          <div class="col-md-4">
             <input id="details" name="details" type="text" placeholder="Ex. with friends!" class="form-control input-md" required="">
-              
-            </div>
-          </div>
-          
-          <!-- Text input-->
-          <div class="form-group">
-              <label class="col-md-4 control-label" for="details">Start Date</label>  
-              <div class="col-md-4">
-              <input id="sdate" name="sdate" type="sdate" placeholder="Ex. 8/24/2019 6:25 PM" class="form-control input-md">
-                
-              </div>
-          </div>
 
-          <!-- Text input-->
-          <div class="form-group">
-              <label class="col-md-4 control-label" for="details">End Date</label>  
-              <div class="col-md-4">
-              <input id="edate" name="edate" type="edate" placeholder="Ex. 8/25/2019 5:34 PM" class="form-control input-md">
-                
-              </div>
           </div>
-          
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="lgimgkey">Large Image Key</label>  
-            <div class="col-md-4">
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="details">Start Date</label>
+          <div class="col-md-4">
+            <input id="sdate" name="sdate" type="sdate" placeholder="Ex. 8/24/2019 6:25 PM" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="details">End Date</label>
+          <div class="col-md-4">
+            <input id="edate" name="edate" type="edate" placeholder="Ex. 8/25/2019 5:34 PM" class="form-control input-md">
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="lgimgkey">Large Image Key</label>
+          <div class="col-md-4">
             <input id="lgimgkey" name="lgimgkey" type="text" placeholder="Ex. house" class="form-control input-md" >
-              
-            </div>
-          </div>
-    
-          <!-- Text input-->
-          <div class="form-group">
-              <label class="col-md-4 control-label" for="smimgkey">Small Image Key</label>  
-              <div class="col-md-4">
-              <input id="smimgkey" name="smimgkey" type="text" placeholder="Ex. tower" class="form-control input-md" >
-                
-              </div>
-          </div>
 
-          <!-- Text input-->
-          <div class="form-group">
-              <label class="col-md-4 control-label" for="psize">Party Size</label>  
-              <div class="col-md-4">
-              <input id="psize" name="psize" type="text" placeholder="Ex. 20" class="form-control input-md">
-                
-              </div>
           </div>
-          
-          <div class="form-group">
-              <label class="col-md-4 control-label" for="psizem">Max Party Size</label>  
-              <div class="col-md-4">
-              <input id="psizem" name="psizem" type="text" placeholder="Ex. 35" class="form-control input-md">
-                
-              </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="smimgkey">Small Image Key</label>
+          <div class="col-md-4">
+            <input id="smimgkey" name="smimgkey" type="text" placeholder="Ex. tower" class="form-control input-md" >
+
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="psize">Party Size</label>
+          <div class="col-md-4">
+            <input id="psize" name="psize" type="text" placeholder="Ex. 20" class="form-control input-md">
+
+          </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-4">
-                <button type="submit" id="submit" class="btn btn-success">Submit</button>
-            </div>
+          <label class="col-md-4 control-label" for="psizem">Max Party Size</label>
+          <div class="col-md-4">
+            <input id="psizem" name="psizem" type="text" placeholder="Ex. 35" class="form-control input-md">
+
+          </div>
         </div>
 
-        </fieldset>
-        </form>
-          
-    </div>
-    <script>
+        <div class="form-group">
+          <div class="col-md-4">
+            <button type="submit" id="submit" class="btn btn-success">Update Presence</button>
+          </div>
+        </div>
 
-    </script>
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-    <style>
-      body { background: #23272A !important; }
-      label, span, legend { color: #fff !important}
-      @media (min-width: 800px) {
-          .container{
-              max-width: 650px;
-          }
-      }
-    </style>
-  </body>
+      </fieldset>
+    </form>
+  </div>
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+  <style>
+  body { background: #23272A !important; }
+  label, span, legend { color: #fff !important}
+  @media (min-width: 800px) {
+    .container{
+      max-width: 650px;
+    }
+  }
+  </style>
+</body>
 </html>
